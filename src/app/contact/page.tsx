@@ -86,7 +86,6 @@ export default function ContactFullPage() {
     setQuickSent(true);
     setTimeout(() => setQuickSent(false), 3500);
   };
-
   return (
     <TooltipProvider delayDuration={400}>
       {/* JSON-LD Organization Schema */}
