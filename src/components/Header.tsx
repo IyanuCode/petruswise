@@ -75,6 +75,7 @@ export default function Header() {
         >
           <Link href="/" className="flex items-center space-x-3">
             <Image
+            // the logo dark here is of upper case L i hope that's the issue
               src={darkMode ? "/logoDark.png" : "/logoLight.png"}
               alt="PetrusWise Logo"
               width={140}
