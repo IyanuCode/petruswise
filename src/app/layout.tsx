@@ -3,7 +3,8 @@ import { Lexend } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import AnimatedLayout from "../components/AnimatedLayout"; // 👈 new client wrapper
+import AnimatedLayout from "../components/AnimatedLayout"; 
+import CustomToaster from "@/components/ui/CustomToaster";
 
 const lexend = Lexend({
   variable: "--font-lexend",
@@ -65,6 +66,7 @@ export default function RootLayout({
       >
         <Header />
         <AnimatedLayout>{children}</AnimatedLayout>
+        <CustomToaster/>
         <Footer />
       </body>
     </html>
