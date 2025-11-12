@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 // Animated number component
 function AnimatedNumber({
@@ -158,8 +159,9 @@ export default function CoverageSection() {
           <motion.button
             className="mt-6 bg-[#CC9933] text-black px-6 py-3 rounded-lg font-semibold shadow-lg hover:scale-105 hover:bg-[#b28427] transition-all"
             whileHover={{ scale: 1.05 }}
+
           >
-            Partner With Us
+            <Link href="/contact">Partner With Us</Link>
           </motion.button>
         </motion.div>
         {/* vertical text with subtle animation */}

@@ -6,6 +6,16 @@ import { FaGlobe } from "react-icons/fa";
 
 import { useState } from "react";
 import Link from "next/link";
+import {useForm} from "react-hook-form";
+import {z} from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+
+//zod schema for form validation
+const quickEnquirySchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters")
+  .max(20, "Name must be at most 20 characters"),
+  email: z.string().email("Invalid email address"),    
+})
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -18,6 +28,9 @@ const fadeUp: Variants = {
 
 export default function QuickInquirySection() {
   const [quickSent, setQuickSent] = useState(false);
+
+  //connect zod schema with react-hook-form
+  // const {register, handleSubmit, formState:}
 
   const onQuickSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,8 +77,9 @@ export default function QuickInquirySection() {
           </p>
 
           <form onSubmit={onQuickSubmit} className="grid sm:grid-cols-3 gap-4">
+              {/* {error.name && <p className="text-sm text-red-500">{error.name.message}</p>} */}
             <input
-              name="qname"
+              name="name"
               placeholder="Name"
               required
               className="
@@ -78,8 +92,9 @@ export default function QuickInquirySection() {
                 transition-colors duration-300
               "
             />
+            {/* {error.email && <p className="text-sm text-red-500">{error.email.message}</p>} */}
             <input
-              name="qemail"
+              name="email"
               placeholder="Email"
               required
               type="email"

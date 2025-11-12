@@ -12,7 +12,7 @@ const testimonials = [
     name: "Chioma E.",
     role: "Operations Manager",
     location: "Lagos",
-    image: "/5.jpg",
+    image: "/scrollOne.jpg",
   },
   {
     emoji: "✨",
@@ -20,7 +20,7 @@ const testimonials = [
     name: "Ibrahim S.",
     role: "Quality Supervisor",
     location: "Ondo",
-    image: "/6.png",
+    image: "/scrollTwo.png",
   },
   {
     emoji: "💃",
@@ -28,7 +28,7 @@ const testimonials = [
     name: "Ngozi A.",
     role: "HR Lead",
     location: "Katsina",
-    image: "/8.jpg",
+    image: "/scrollTwo.jpg",
   },
   {
     emoji: "🚀",
@@ -36,7 +36,7 @@ const testimonials = [
     name: "Michael O.",
     role: "Consultant",
     location: "Ogbomoso",
-    image: "/8.jpg",
+    image: "/scrollThree.jpg",
   },
   {
     emoji: "🌟",
@@ -44,7 +44,7 @@ const testimonials = [
     name: "Tosin D.",
     role: "Compliance Officer",
     location: "Ibadan",
-    image: "/9.png",
+    image: "/scrollEight.jpg",
   },
 ];
 
@@ -63,7 +63,7 @@ const testimonials2 = [
     name: "Oluwaseun F.",
     role: "Project Coordinator",
     location: "Port Harcourt",
-    image: "/6.png",
+    image: "/scrollSeven.jpg",
   },
   {
     emoji: "🔥",
@@ -71,7 +71,7 @@ const testimonials2 = [
     name: "Adewale G.",
     role: "Team Lead",
     location: "Ilorin",
-    image: "/8.jpg",
+    image: "/scrollFour.jpg",
   },
   {
     emoji: "🏆",
@@ -79,7 +79,7 @@ const testimonials2 = [
     name: "Fatima B.",
     role: "Process Engineer",
     location: "Kano",
-    image: "/9.png",
+    image: "/scrollSix.jpg",
   },
   {
     emoji: "💎",
@@ -87,7 +87,7 @@ const testimonials2 = [
     name: "Emmanuel I.",
     role: "Production Supervisor",
     location: "Benin City",
-    image: "/5.jpg",
+    image: "/scrollFive.jpg",
   },
 ];
 
