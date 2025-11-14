@@ -24,7 +24,9 @@ export default function Header() {
       setDarkMode(stored === "dark");
       document.documentElement.classList.toggle("dark", stored === "dark");
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
       setDarkMode(prefersDark);
       document.documentElement.classList.toggle("dark", prefersDark);
     }
@@ -53,7 +55,12 @@ export default function Header() {
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: i * 0.1, type: "spring", stiffness: 300, damping: 20 },
+      transition: {
+        delay: i * 0.1,
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+      },
     }),
   };
 
@@ -75,11 +82,12 @@ export default function Header() {
         >
           <Link href="/" className="flex items-center space-x-3">
             <Image
-            // the logo dark here is of upper case L i hope that's the issue
+              // the logo dark here is of upper case L i hope that's the issue
               src={darkMode ? "/logoDark.png" : "/logoLight.png"}
               alt="PetrusWise Logo"
               width={140}
               height={40}
+              className="h-auto w-auto"
               priority
             />
           </Link>
@@ -114,7 +122,10 @@ export default function Header() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, type: "spring", stiffness: 250 }}
             >
-              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+              <motion.div
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Link
                   href="/dashboard"
                   className="flex items-center gap-2 px-4 py-2 rounded-md font-medium bg-[var(--brand-gold)] text-[var(--brand-black)] hover:brightness-90 shadow-sm transition-all"
@@ -143,7 +154,11 @@ export default function Header() {
             exit={{ rotate: -180, opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            {darkMode ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
+            {darkMode ? (
+              <SunIcon className="w-6 h-6" />
+            ) : (
+              <MoonIcon className="w-6 h-6" />
+            )}
           </motion.div>
         </motion.button>
 
@@ -216,14 +231,17 @@ export default function Header() {
                 </motion.li>
               ))}
 
-              <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+              <motion.li
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
                 <Link
                   href="/dashboard"
                   className="flex items-center gap-2 px-5 py-2 bg-[var(--brand-gold)] rounded-lg text-[var(--brand-black)] font-medium text-center shadow-sm"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                <FaChartLine className="text-lg " />
-
+                  <FaChartLine className="text-lg " />
                   Dashboard
                 </Link>
               </motion.li>

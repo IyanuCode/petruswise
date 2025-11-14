@@ -29,7 +29,7 @@ model PageContent {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
-// ------------------- contactPage model -------------------
+// --------------------CONTACT-------------------
 model ContactMessage {
   id        Int      @id @default(autoincrement())
   name      String
@@ -87,7 +87,41 @@ model Partner {
   contactPage           ContactPage? @relation(fields: [contactPageId], references: [id])
   contactPageId         Int?
 }
-//--------------contactPage Ends----------------------------------------------------------
+//--------------CONTACT PAGE ENDS-----------------------------------------
+
+
+
+
+// --------------------SERVICE PAGE-------------------
+model ServicePage {
+  id         Int           @id @default(autoincrement())
+  slug       String        @unique
+  heroImage  String
+  prevCloudinaryImgId   String?  ///delete the old image when updating    
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  services   ServiceData[]
+}
+
+model ServiceData {
+  id                    Int          @id @default(autoincrement())
+  title                 String
+  quote                 String
+  description           String
+  imageUrl              String
+  prevCloudinaryImgId   String?  ///delete the old image when updating    
+
+  slug                  String       @unique
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+
+  servicePageId         Int
+  servicePage           ServicePage @relation(fields: [servicePageId], references: [id], onDelete: Cascade)
+}
+
+
+//--------------SERVICE PAGE ENDS-----------------------------------------
 
 
 

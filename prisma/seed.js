@@ -163,6 +163,104 @@ async function main() {
   console.log("✅ Contact Page seeding completed successfully!");
 }
 
+
+// Create a service page with hero image and service data
+  await prisma.servicePage.upsert({
+    where: { slug: "service-page" },
+    update: {},
+    create: {
+      heroImage: '/hero1.jpg',
+      slug: "service-page",
+      services: {
+        create: [
+          {
+            title: 'Management Systems Consulting',
+            quote:
+              'Our approach is holistic. We begin by understanding the nature and structure of your organization.',
+            description:
+              'We design and implement globally recognized systems like ISO 9001, 14001, 45001, and 22000, aligning compliance with strategy for sustainable operational excellence.',
+            imageUrl: '/hero5.jpg',
+            slug: 'management-systems',
+          },
+          {
+            title: 'Regulatory Consulting & Advisory',
+            quote: 'We turn regulatory bottlenecks into bridges.',
+            description:
+              'From NAFDAC to SON and NESREA, we help businesses navigate compliance with confidence — building proactive systems that ensure long-term regulatory trust.',
+            imageUrl: '/Regulatory.jpg',
+            slug: 'regulatory-consulting',
+          },
+          {
+            title: 'Quality Assurance & Laboratory Systems',
+            quote:
+              'Quality must be engineered into the DNA of every organization.',
+            description:
+              'We develop robust QA systems and lab processes that meet ISO/IEC 17025 and TQM standards, ensuring reliability, consistency, and brand excellence.',
+            imageUrl: '/28.png',
+            slug: 'quality-assurance',
+          },
+          {
+            title: 'Customer Complaint Management',
+            quote:
+              'Every customer complaint is a data point, a lesson, and a chance to improve.',
+            description:
+              'We build complaint management frameworks that capture insights and transform feedback into innovation, loyalty, and measurable satisfaction.',
+            imageUrl: '/comp.jpg',
+            slug: 'complaint-management',
+          },
+          {
+            title: 'Human Capital Development',
+            quote:
+              'Your workforce is not just a support system — it is your greatest asset.',
+            description:
+              'We deliver training and leadership programs that build competence, culture, and confidence — preparing your people for tomorrow’s opportunities.',
+            imageUrl: '/9.png',
+            slug: 'human-capital',
+          },
+          {
+            title: 'Business Process Improvement',
+            quote: 'Every thriving organization is built on efficient processes.',
+            description:
+              'Using Lean, Six Sigma, and Kaizen methodologies, we redesign workflows for clarity, speed, and performance-driven results.',
+            imageUrl: '/BPI.png',
+            slug: 'process-improvement',
+          },
+          {
+            title: 'Educational Consulting',
+            quote: 'We help individuals unlock global opportunities.',
+            description:
+              'From career guidance to scholarships, we guide students and professionals to achieve local and international academic success.',
+            imageUrl: '/educa.png',
+            slug: 'educational-consulting',
+          },
+          {
+            title: 'Training & Development',
+            quote:
+              'Training is not a tick-box activity — it is a strategic enabler of transformation.',
+            description:
+              'Our training combines theory with hands-on impact — covering compliance, leadership, communication, and change management.',
+            imageUrl: '/Training.jpg',
+            slug: 'training',
+          },
+          {
+            title: 'Human Resource Services',
+            quote: 'Finding the right people is just the beginning.',
+            description:
+              'We provide recruitment, outsourcing, and performance systems that align people strategy with business strategy for enduring success.',
+            imageUrl: '/5.jpg',
+            slug: 'hr-services',
+          },
+        ],
+      },
+    },
+  });
+
+  console.log('✅ ServicePage and all ServiceData seeded successfully!');
+
+
+
+
+
 main()
   .then(() => console.log("✅ Seeding complete"))
   .catch((e) => {

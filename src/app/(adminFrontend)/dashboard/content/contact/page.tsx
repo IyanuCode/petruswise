@@ -348,7 +348,9 @@ export default function DashboardContactEditor() {
               )
             : console.log("newImgPublicId is not generated at all");
 
-          payload.logoUrl = newImgUrl; // update payload with new image
+          if (newImgUrl) {
+            payload.logoUrl = newImgUrl; // update payload with new image
+          }
           toast.success("Upload Successful", { id: toastId });
         } else {
           toast.error("Image upload failed", { id: toastId });
@@ -399,7 +401,7 @@ export default function DashboardContactEditor() {
       setPartnerModalOpen(false);
     }
   };
-
+//NOT-USED
   const deletePartner = async (id?: number) => {
     if (!id) return;
     if (!confirm("Delete partner?")) return;

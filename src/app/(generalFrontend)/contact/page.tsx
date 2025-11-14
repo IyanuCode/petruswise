@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import ContactFullPageClient from "@/components/contact/ContactFullPageClient";
 
-export const revalidate = 0; // disable caching for dev
+// export const revalidate = 0; // disable caching for dev
 
 export default async function ContactPage() {
   // Fetch data from Prisma (server-side)
