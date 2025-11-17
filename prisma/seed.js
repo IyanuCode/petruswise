@@ -4,7 +4,8 @@ import * as bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
-  //  Create or update admin
+   /*-----------------------------------------------------USER(ADMIN)----------------------------------------------- */
+ //  Create or update admin
   const password = await bcrypt.hash("Admin@123", 10);
   await prisma.admin.upsert({
     where: { email: "admin@petruswise.com" },
@@ -17,85 +18,135 @@ async function main() {
     },
   });
 
-  // About Page
-  await prisma.aboutPage.upsert({
-    where: { slug: "about-page" },
-    update: {},
-    create: {
-      slug: "about-page",
-      heroTitle: "About PetrusWise",
-      heroImage: "/about-hero.jpg",
-      heroParagraph:
-        "PetrusWise partners with public and private institutions to design systems that deliver compliance, quality, and measurable growth.",
-      ourStoryIntro:
-        "In a world where business challenges evolve faster than most organizations can adapt, the need for transformation remains indispensable.",
-      ourStoryCont:
-        "we redefine consulting in Africa by helping businesses become agile, effective, and compliant. We believe that true growth is achieved through adaptability, innovation, and alignment with evolving industry standards.",
-      ourStoryEnding:
-        "Our experts provide tailored solutions—not a one-size-fits-all model. We focus on understanding your unique business landscape, crafting practical strategies that deliver measurable results across ISO certifications, regulatory compliance, HR management, and professional training.",
-      vision:
-        "To lead consultancy in management systems, regulatory affairs, education, and quality assurance—delivering innovative solutions that transform organizations and improve lives across Africa.",
-      mission:
-        "We help organizations enhance safety, quality,environmental performance, and productivity—contributing to a better society and improved quality of life.",
+  /*-----------------------------------------------------ABOUT PAGE----------------------------------------------- */
+ // Seed the about page
+const aboutPage = await prisma.aboutPage.upsert({
+  where: { slug: "about-page" },
+  update: {
+    heroImage: "/hero3.jpg",
+  },
+  create: {
+    slug: "about-page",
+    heroTitle: "About PetrusWise",
+    heroImage: "/hero3.jpg",
+    heroParagraph:
+      "PetrusWise partners with public and private institutions to design systems that deliver compliance, quality, and measurable growth.",
+    ourStoryIntro:
+      "In a world where business challenges evolve faster than most organizations can adapt, the need for transformation remains indispensable.",
+    ourStoryCont:
+      "We redefine consulting in Africa by helping businesses become agile, effective, and compliant. We believe that true growth is achieved through adaptability, innovation, and alignment with evolving industry standards.",
+    ourStoryEnding:
+      "Our experts provide tailored solutions—not a one-size-fits-all model. We focus on understanding your unique business landscape, crafting practical strategies that deliver measurable results across ISO certifications, regulatory compliance, HR management, and professional training.",
+    vision:
+      "To lead consultancy in management systems, regulatory affairs, education, and quality assurance—delivering innovative solutions that transform organizations and improve lives across Africa.",
+    mission:
+      "We help organizations enhance safety, quality, environmental performance, and productivity—contributing to a better society and improved quality of life.",
+  },
+});
 
-      staff: {
-        create: [
-          {
-            name: "Mr. Bisi Popoola",
-            role: "Partner, HR & Organizational Effectiveness",
-            experience: "15+ years experience",
-            tooltip:
-              "Expert in HR strategy, cultural transformation, and people management.",
-            image: "/popoola.jpg",
-            overlayText: "A Transformative Leader",
-            bio: "Mr. Bisi Popoola is a seasoned HR professional with over 15 years across consulting, FMCG, and QSR sectors. He has led organizational transformation at Cadbury, PZ Cussons, Perfetti Van Melle, and UAC Foods, driving performance through people. He holds an MSc in HR & Industrial Relations and multiple global HR certifications including SHRM-SCP and GPHR. A strategic leader and talented instrumentalist, he is happily married with children.",
-          },
-          {
-            name: "Mrs. Tayo Awotiku",
-            role: "Partner, Legal Services",
-            experience: "12+ years experience",
-            tooltip: "Legal expert in corporate, labour, and compliance law.",
-            image: "/awotiku.jpg",
-            overlayText: "Counsel for Clarity & Compliance",
-            bio: "Mrs. Tayo Awotiku is an accomplished legal practitioner with over 12 years of experience in corporate law, compliance, and arbitration. She has provided strategic legal counsel across industries, ensuring clarity and compliance in transactions and governance. A Master's degree holder in Public Law from the University of Ibadan, she is also a skilled writer and editor, valued for her articulate expression and integrity-driven approach.",
-          },
-          {
-            name: "Engr. Piagbo Beabu Kiasira",
-            role: "Senior Consultant, ISG Management Systems",
-            experience: "400+ audits conducted",
-            tooltip:
-              "COREN-certified ISO consultant and PECB Lead Implementer.",
-            image: "/kiasira.jpg",
-            overlayText: "Driven by Quality",
-            bio: "Engr. Piagbo Beabu Kiasira is a COREN-certified engineer and ISO systems consultant with extensive auditing experience across manufacturing, oil & gas, and telecom sectors. He is a Lead Auditor for ISO 9001, 14001, 45001, 22000, and 13485, as well as a PECB-certified Lead Implementer for ISO 37301. Holding a Master’s degree in Project Management (Distinction) from Teesside University, UK, he brings a results-driven commitment to quality and leadership.",
-          },
-          {
-            name: "Mrs. Taiwo Olagoke",
-            role: "Senior Consultant, QA & GHP",
-            experience: "18+ years experience",
-            tooltip:
-              "Specialist in QA systems, audits, and process optimization.",
-            image: "/olagoke.jpg",
-            overlayText: "Quality in Action",
-            bio: "Mrs. Taiwo Olagoke is a quality assurance professional with more than 18 years of manufacturing experience. She has developed and implemented comprehensive QA systems that improve product integrity, compliance, and sustainability. Her expertise in audits, production oversight, and continuous improvement drives operational excellence across organizations.",
-          },
-          {
-            name: "Mr. Tayo Egbedeyi",
-            role: "Senior Consultant, R&D and Regulatory",
-            experience: "20+ years experience",
-            tooltip:
-              "Expert in ISO standards, GMP, and Six Sigma implementation.",
-            image: "/egbedeyi.jpg",
-            overlayText: "Known for Excellence",
-            bio: "Mr. Tayo Egbedeyi brings nearly two decades of experience in laundry, personal care, and home care industries. He has successfully led ISO 9001, 14001, 45001, and 22716 (GMP) implementations and driven R&D and regulatory excellence. His application of Six Sigma and lean methodologies has improved compliance, operational efficiency, and customer satisfaction.",
-          },
-        ],
-      },
+console.log("✅ About page upserted");
+
+// Staff data to sync (source of truth)
+const staffSeed = [
+  {
+    name: "Mr. Bisi Popoola",
+    role: "Partner, HR & Organizational Effectiveness",
+    experience: "15+ years experience",
+    tooltip:
+      "Expert in HR strategy, cultural transformation, and people management.",
+    imageUrl: "/popoola.jpg",
+    overlayText: "A Transformative Leader",
+    bio: "Mr. Bisi Popoola is a seasoned HR professional with over 15 years across consulting, FMCG, and QSR sectors...",
+  },
+  {
+    name: "Mrs. Tayo Awotiku",
+    role: "Partner, Legal Services",
+    experience: "12+ years experience",
+    tooltip: "Legal expert in corporate, labour, and compliance law.",
+    imageUrl: "/awotiku.jpg",
+    overlayText: "Counsel for Clarity & Compliance",
+    bio: "Mrs. Tayo Awotiku is an accomplished legal practitioner with over 12 years of experience...",
+  },
+  {
+    name: "Engr. Piagbo Beabu Kiasira",
+    role: "Senior Consultant, ISG Management Systems",
+    experience: "400+ audits conducted",
+    tooltip:
+      "COREN-certified ISO consultant and PECB Lead Implementer.",
+    imageUrl: "/kiasira.jpg",
+    overlayText: "Driven by Quality",
+    bio: "Engr. Piagbo Beabu Kiasira is a COREN-certified engineer and ISO systems consultant...",
+  },
+  {
+    name: "Mrs. Taiwo Olagoke",
+    role: "Senior Consultant, QA & GHP",
+    experience: "18+ years experience",
+    tooltip:
+      "Specialist in QA systems, audits, and process optimization.",
+    imageUrl: "/olagoke.jpg",
+    overlayText: "Quality in Action",
+    bio: "Mrs. Taiwo Olagoke is a quality assurance professional with more than 18 years of manufacturing experience...",
+  },
+  {
+    name: "Mr. Tayo Egbedeyi",
+    role: "Senior Consultant, R&D and Regulatory",
+    experience: "20+ years experience",
+    tooltip:
+      "Expert in ISO standards, GMP, and Six Sigma implementation.",
+    imageUrl: "/egbedeyi.jpg",
+    overlayText: "Known for Excellence",
+    bio: "Mr. Tayo Egbedeyi brings nearly two decades of experience in laundry, personal care, and home care industries...",
+  },
+];
+
+// Loop through staff and update or create them
+for (const staff of staffSeed) {
+  await prisma.staff.upsert({
+    where: {
+      // match by unique name
+      name: staff.name,
+    },
+    update: {
+      role: staff.role,
+      experience: staff.experience,
+      tooltip: staff.tooltip,
+      imageUrl: staff.imageUrl,
+      overlayText: staff.overlayText,
+      bio: staff.bio,
+      aboutPageId: aboutPage.id, // keeps relation intact
+    },
+    create: {
+      ...staff,
+      aboutPageId: aboutPage.id,
     },
   });
-  console.log("✅ About page seeded:");
+}
 
-  //  Create or update contact page
+console.log("✅ Staff synced successfully");
+
+  
+  await prisma.ceo.upsert({
+    where: { name: "Olanrewaju Oresanya" },
+    update: {
+      title: "Chief Executive Officer",
+      bio: `Olanrewaju Oresanya is a seasoned Management Systems expert with over 27 years of QHSE and operational experience spanning R&D, procurement, manufacturing, distribution, and customer service. He holds an MBA from Ekiti State University and an HND in Analytical Chemistry from Yaba College of Technology. He is a Fellow of the Institute of Chartered Chemists of Nigeria, a member of the Management Systems Practitioners of Nigeria (MASPN), and a certified Lead Auditor for ISO 9001:2015 and FSSC 22000. Mr. Oresanya began his career at Procter & Gamble Nigeria as a Quality Analyst, later becoming the Quality Control Leader of the Ibadan Plant. In 2013, he joined PZ Cussons Nigeria PLC as Quality Assurance Manager, rising to Africa Quality Systems Manager and ISO 9001:2015 Representative. He has been instrumental in achieving ISO certifications and building sustainable quality infrastructures across operations in Africa. He currently serves as Head of Quality and Quality Systems Manager for Africa at PZ Cussons. At PetrusWise Limited, Mr. Oresanya leads with integrity, regulatory insight, and a performance-driven vision—ensuring every client engagement translates into measurable impact and compliance excellence.`,
+      imageUrl: "/ceo.jpg",
+      quote: "An Architect of Quality Systems in Africa.",
+      aboutPageId: aboutPage.id,
+    },
+    create: {
+      name: "Olanrewaju Oresanya",
+      title: "Chief Executive Officer",
+      bio: `Olanrewaju Oresanya is a seasoned Management Systems expert with over 27 years of QHSE and operational experience spanning R&D, procurement, manufacturing, distribution, and customer service. He holds an MBA from Ekiti State University and an HND in Analytical Chemistry from Yaba College of Technology. He is a Fellow of the Institute of Chartered Chemists of Nigeria, a member of the Management Systems Practitioners of Nigeria (MASPN), and a certified Lead Auditor for ISO 9001:2015 and FSSC 22000. Mr. Oresanya began his career at Procter & Gamble Nigeria as a Quality Analyst, later becoming the Quality Control Leader of the Ibadan Plant. In 2013, he joined PZ Cussons Nigeria PLC as Quality Assurance Manager, rising to Africa Quality Systems Manager and ISO 9001:2015 Representative. He has been instrumental in achieving ISO certifications and building sustainable quality infrastructures across operations in Africa. He currently serves as Head of Quality and Quality Systems Manager for Africa at PZ Cussons. At PetrusWise Limited, Mr. Oresanya leads with integrity, regulatory insight, and a performance-driven vision—ensuring every client engagement translates into measurable impact and compliance excellence.`,
+      imageUrl: "/ceo.jpg",
+      quote: "An Architect of Quality Systems in Africa.",
+      aboutPageId: aboutPage.id,
+    },
+  });
+
+  console.log("✅ CEO seeded");
+
+  /*-----------------------------------------------------CONTACT PAGE----------------------------------------------- */
   await prisma.contactPage.upsert({
     where: { slug: "contact-page" },
     update: {},
@@ -159,11 +210,9 @@ async function main() {
       },
     },
   });
-
   console.log("✅ Contact Page seeding completed successfully!");
-}
 
-
+  /*-----------------------------------------------------SERVICE PAGE----------------------------------------------- */
 // Create a service page with hero image and service data
   await prisma.servicePage.upsert({
     where: { slug: "service-page" },
@@ -254,10 +303,11 @@ async function main() {
       },
     },
   });
-
   console.log('✅ ServicePage and all ServiceData seeded successfully!');
 
 
+  
+}
 
 
 

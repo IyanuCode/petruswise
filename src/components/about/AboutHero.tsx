@@ -6,9 +6,13 @@ type AboutHeroProps = {
   heroTitle: string;
   heroParagraph: string;
   heroImage?: string;
-}
+};
 
-export default function AboutHero({heroTitle, heroParagraph }:AboutHeroProps) {
+export default function AboutHero({
+  heroTitle,
+  heroParagraph,
+  heroImage,
+}: AboutHeroProps) {
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -32,7 +36,7 @@ export default function AboutHero({heroTitle, heroParagraph }:AboutHeroProps) {
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{
           y: heroY,
-          backgroundImage: "url('/hero3.jpg')",
+          backgroundImage: `url('${heroImage && heroImage.trim() !== "" ? heroImage : "/hero3.jpg"}')`,
 
         }}
       />
@@ -47,7 +51,7 @@ export default function AboutHero({heroTitle, heroParagraph }:AboutHeroProps) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-[var(--brand-gold)] [text-shadow:1px_1px_2px_white]"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-[var(--brand-gold)]"
         >
           {heroTitle}
         </motion.h1>
@@ -58,8 +62,8 @@ export default function AboutHero({heroTitle, heroParagraph }:AboutHeroProps) {
           transition={{ duration: 0.9, delay: 0.15 }}
           className="
     mt-6 text-base md:text-lg max-w-3xl mx-auto leading-relaxed
-    text-[var(--foreground)] font-bold
-    [text-shadow:1px_1px_2px_white]
+    text-[var(--foreground)] font-bold subheading
+    
   "
         >
           {heroParagraph}

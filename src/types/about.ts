@@ -8,7 +8,17 @@ export type AboutPageType = {
   ourStoryIntro: string;
   ourStoryCont: string;
   ourStoryEnding: string;
-  
+
+  ceo: {
+  name: string;
+  title: string;
+  bio: string;
+  imageUrl: string;
+  quote?: string | null;
+}[];
+
+ 
+
   staff: {
     id: number;
     name: string;
@@ -16,7 +26,7 @@ export type AboutPageType = {
     experience: string;
     tooltip: string | null;
     bio: string | null;
-    image: string | null;
-    overlayText: string | null;
+    imageUrl: string | null;          
+    overlayText: string | null; 
   }[];
 };

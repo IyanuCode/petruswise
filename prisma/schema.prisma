@@ -125,38 +125,55 @@ model ServiceData {
 
 
 
-// ------------------- About page model -------------------
+// ------------------- ABOUT PAGE -------------------
 model AboutPage {
-  id              Int      @id @default(autoincrement())
-  slug            String   @unique
-  heroTitle       String
-  heroParagraph   String
-  heroImage       String
-  ourStoryIntro   String
-  ourStoryCont    String
-  ourStoryEnding  String
-  mission         String
-  vision          String
-  updatedAt       DateTime @updatedAt
-
-  staff           Staff[]  // One-to-many relation to Staff
+  id                      Int      @id @default(autoincrement())
+  slug                    String   @unique
+  heroTitle               String
+  heroParagraph           String
+  heroImage               String
+  prevCloudinaryImgId     String?
+  ourStoryIntro           String
+  ourStoryCont            String
+  ourStoryEnding          String
+  mission                 String
+  vision                  String
+  updatedAt               DateTime @updatedAt
+  ceo                     Ceo[]
+  staff                   Staff[]  // One-to-many relation to Staff
 }
 
 // ------------------- Staff model -------------------
 model Staff {
-  id          Int        @id @default(autoincrement())
-  name        String
-  role        String
-  experience  String
-  tooltip     String?
-  bio         String?
-  image       String?
-  overlayText String?
-  aboutPageId Int?       // foreign key to AboutPage
+  id                    Int        @id @default(autoincrement())
+  name                  String     @unique
+  role                  String
+  experience            String
+  tooltip               String?
+  bio                   String?
+  imageUrl              String?
+  prevCloudinaryImgId   String?
+  overlayText           String?
+  aboutPageId           Int?       // foreign key to AboutPage
 
   aboutPage   AboutPage? @relation(fields: [aboutPageId], references: [id])
   createdAt   DateTime   @default(now())
 }
+
+model Ceo {
+  id                    Int       @id @default(autoincrement())
+  name                  String    @unique
+  title                 String
+  bio                   String
+  imageUrl              String
+  prevCloudinaryImgId   String?
+  quote                 String?
+  aboutPageId           Int     @unique
+  aboutPage             AboutPage @relation(fields: [aboutPageId], references: [id])
+  createdAt             DateTime  @default(now())
+}
+
+//--------------ABOUT PAGE ENDS-----------------------------------------
 
 enum Role {
   SUPERADMIN

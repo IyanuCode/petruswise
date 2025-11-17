@@ -22,15 +22,25 @@ export default function AboutFullPageClient({about}: AboutPageTypeScript) {
         heroImage={about.heroImage}
       />
       {/* our story component also consist of mission, vision and core value */}
-      <OurStory
+      <ScrollReveal>
+       <OurStory
         mission={about.mission}
         vision={about.vision}
         ourStoryIntro={about.ourStoryIntro}
         ourStoryCont={about.ourStoryCont}
         ourStoryEnding={about.ourStoryEnding}
       />
-      <CeoProfile />
-      <StaffSection staffData={about.staff} />
+       </ScrollReveal>
+    <ScrollReveal>
+        <CeoProfile 
+      ceo={about.ceo} 
+      />
+    </ScrollReveal>
+
+    <ScrollReveal>
+            <StaffSection staffData={about.staff} />
+
+      </ScrollReveal>
     </main>
   );
 }
