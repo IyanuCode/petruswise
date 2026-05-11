@@ -7,9 +7,9 @@ import uploadImageCloudinary from "@/lib/uploadImageCloudinary";
 import toast from "react-hot-toast";
 
 // Props for the admin page, receives the service page ID
-type ServicesAdminPageProps = {
-  servicePageId: number;
-};
+// type ServicesAdminPageProps = {
+//   servicePageId: number;
+// };
 //for the image
 type ImageData = {
   id: number;
@@ -29,7 +29,11 @@ type ServiceItemForm = {
   slug: string; // Slug for routing / URL
 };
 
-export default function ServicesAdminPage({}: ServicesAdminPageProps) {
+//this is what i wrote initally, i felt i wrote something in the braces before maybe it was cleared by mistake
+// export default function ServicesAdminPage({}: ServicesAdminPageProps) {
+//but i replaced it with the below inorder to run it on vercel
+export default function ServicesAdminPage() {
+
   // State for hero image file and preview
   const [heroImageFile, setHeroImageFile] = useState<File | null>(null);
   const [heroImagePreview, setHeroImagePreview] = useState<string | null>(null);
